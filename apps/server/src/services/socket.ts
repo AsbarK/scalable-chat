@@ -7,6 +7,7 @@ class SocketService{
         this._io  = new Server({
             cors:{
                 allowedHeaders:["*"],
+                origin:"*"
             }
         })
     }
@@ -17,7 +18,7 @@ class SocketService{
     
     public initConnection(){
         const io = this._io
-        io.on('connection',(socket)=>{
+        io.on('connect',(socket)=>{
             console.log(`New Connection ${socket.id}`)
             socket.on("event:message",async({message}:{message:string})=>{
                 console.log(`New message ${message}`)
